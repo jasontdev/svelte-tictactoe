@@ -5,26 +5,19 @@
 
   function checkForWinner(player: string): boolean {
     function checkRow(n: number): boolean {
-      if (
+      return (
         squares[n * 3] === player &&
         squares[n * 3 + 1] === player &&
         squares[n * 3 + 2] === player
-      ) {
-        return true;
-      }
-      return false;
+      );
     }
 
     function checkColumn(n: number): boolean {
-      if (
+      return (
         squares[n] === player &&
         squares[n + 3] === player &&
         squares[n + 6] === player
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+      );
     }
 
     function checkDiagonals(): boolean {
