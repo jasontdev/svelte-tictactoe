@@ -8,6 +8,7 @@
 
 <style>
   .box {
+    box-sizing: border-box;
     border-style: solid;
     width: 150px;
     height: 150px;

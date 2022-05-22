@@ -60,26 +60,16 @@
   }
 </script>
 
-<div>
-  <div class="row">
-    <Square value={squares[0]} on:click={() => handleClick(0)} />
-    <Square value={squares[1]} on:click={() => handleClick(1)} />
-    <Square value={squares[2]} on:click={() => handleClick(2)} />
-  </div>
-  <div class="row">
-    <Square value={squares[3]} on:click={() => handleClick(3)} />
-    <Square value={squares[4]} on:click={() => handleClick(4)} />
-    <Square value={squares[5]} on:click={() => handleClick(5)} />
-  </div>
-  <div class="row">
-    <Square value={squares[6]} on:click={() => handleClick(6)} />
-    <Square value={squares[7]} on:click={() => handleClick(7)} />
-    <Square value={squares[8]} on:click={() => handleClick(8)} />
-  </div>
+<div class="board">
+  {#each squares as square, index}
+    <Square value={square} on:click={() => handleClick(index)} />
+  {/each}
 </div>
 
 <style>
-  .row {
+  .board {
     display: flex;
+    flex-wrap: wrap;
+    width: 450px;
   }
 </style>
