@@ -1,9 +1,10 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   export let value = "";
-  export let onClick;
+  const dispatch = createEventDispatcher();
 </script>
 
-<div class="box" on:click={onClick}>{value}</div>
+<div class="box" on:click={() => dispatch('click')}>{value}</div>
 
 <style>
   .box {
