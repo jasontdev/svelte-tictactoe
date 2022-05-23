@@ -1,4 +1,4 @@
-function checkForWinner(squares: string[], player: string): boolean {
+function checkForWinner(squares: string[], player: string): string {
   function checkRow(n: number): boolean {
     return (
       squares[n * 3] === player &&
@@ -35,14 +35,21 @@ function checkForWinner(squares: string[], player: string): boolean {
     return false;
   }
 
-  if (checkRow(0) || checkRow(1) || checkRow(2)) {
-    return true;
+  for (let i = 0; i < 3; ++i) {
+    if (checkRow(i)) {
+      return player;
+    }
+
+    if (checkColumn(i)) {
+      return player;
+    }
   }
 
-  if (checkColumn(0) || checkColumn(1) || checkColumn(2)) {
-    return true;
+  if (checkDiagonals()) {
+    return player;
   }
-  return checkDiagonals();
+
+  return "";
 }
 
-export {checkForWinner};
+export { checkForWinner };
