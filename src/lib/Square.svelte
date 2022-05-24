@@ -13,9 +13,10 @@
   .box {
     box-sizing: border-box;
     border-style: solid;
-    width: 150px;
-    height: 150px;
-    font-size: 8rem;
+    border-radius: 10px;
+    width: 110px;
+    height: 110px;
+    font-size: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;

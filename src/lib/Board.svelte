@@ -13,6 +13,8 @@
   .board {
     display: flex;
     flex-wrap: wrap;
-    width: 450px;
+    width: 360px;
+    height: 360px;
+    gap: 15px;
   }
 </style>
