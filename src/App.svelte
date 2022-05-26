@@ -1,20 +1,42 @@
 <script lang="ts">
   import Board from "./lib/Board.svelte";
-  import { checkForWinner } from "./lib/game-logic";
+  import { checkForWinner, Player } from "./lib/game-logic";
 
-  let squares = ["", "", "", "", "", "", "", "", ""];
-  let currentPlayer = "X";
-  let winner = "";
+  let squares: (Player | null)[] = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ];
+
+  let playerOne = {
+    id: 0,
+    name: "Alfred",
+  };
+
+  let playerTwo = {
+    id: 1,
+    name: "Jason",
+  };
+  let currentPlayer = playerOne;
+  let winner: Player | null = null;
 
   function handleClick(event: CustomEvent<{ square: number }>) {
-    if (winner === "") {
-      if (squares[event.detail.square] === "") {
+    if (!winner) {
+      if (squares[event.detail.square] === null) {
         squares[event.detail.square] = currentPlayer;
+        const result = checkForWinner(squares, currentPlayer);
 
-        if (checkForWinner(squares, currentPlayer) === currentPlayer) {
+        if (result && result.hasWinner && result.winner.id === currentPlayer.id) {
           winner = currentPlayer;
         } else {
-          currentPlayer = currentPlayer === "X" ? "O" : "X";
+          console.log("Swapping players");
+          currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
         }
       }
     }

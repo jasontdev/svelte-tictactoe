@@ -1,55 +1,33 @@
-function checkForWinner(squares: string[], player: string): string {
-  function checkRow(n: number): boolean {
-    return (
-      squares[n * 3] === player &&
-      squares[n * 3 + 1] === player &&
-      squares[n * 3 + 2] === player
-    );
-  }
+type Player = {
+  id: number;
+  name: string;
+};
 
-  function checkColumn(n: number): boolean {
-    return (
-      squares[n] === player &&
-      squares[n + 3] === player &&
-      squares[n + 6] === player
-    );
-  }
+type Result = {
+  hasWinner: boolean;
+  winner?: Player;
+};
 
-  function checkDiagonals(): boolean {
-    if (
-      squares[0] === player &&
-      squares[4] === player &&
-      squares[8] === player
-    ) {
-      return true;
-    }
-
-    if (
-      squares[2] === player &&
-      squares[4] === player &&
-      squares[7] === player
-    ) {
-      return true;
-    }
-
-    return false;
-  }
-
+function checkRow(squares: (Player | null)[], row: number, player: Player) {
+  let matches = 0;
   for (let i = 0; i < 3; ++i) {
-    if (checkRow(i)) {
-      return player;
-    }
-
-    if (checkColumn(i)) {
-      return player;
+    if (squares[row * 3 + i] !== null && squares[row * 3 + i].id === player.id) {
+      matches++;
     }
   }
 
-  if (checkDiagonals()) {
-    return player;
-  }
-
-  return "";
+  return matches === 3;
 }
 
-export { checkForWinner };
+function checkForWinner(squares: (Player | null)[], player: Player): Result {
+  for(let i = 0; i < 3; i++) {
+    if(checkRow(squares, i, player)) {
+      return {hasWinner: true, winner: player}
+    }
+  }
+
+  return { hasWinner: false };
+}
+
+export { checkForWinner, checkRow };
+export type { Player };

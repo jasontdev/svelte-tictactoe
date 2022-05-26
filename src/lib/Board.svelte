@@ -1,11 +1,13 @@
 <script lang="ts">
+import type { Player } from "./game-logic";
+
   import Square from "./Square.svelte";
-  export let squares: string[];
+  export let squares: Player[];
 </script>
 
 <div class="board">
   {#each squares as square, index}
-    <Square key={index} value={square} on:squareClicked />
+    <Square key={index} player={square} on:squareClicked />
   {/each}
 </div>
 

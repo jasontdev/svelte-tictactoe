@@ -1,12 +1,14 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  export let value = "";
+  export let player = null;
   export let key: number;
   const dispatch = createEventDispatcher();
 </script>
 
-<div class="box" on:click={() => dispatch("squareClicked", { square: key })}>
-  {value}
+<div class="box" on:click={() => dispatch("squareClicked", { square: key })}> 
+  {#if player}
+    {player.id}
+  {/if}
 </div>
 
 <style>
