@@ -41,6 +41,10 @@ function checkForWinner(squares: (Player | null)[], player: Player): Result {
     if (checkRow(squares, i, player)) {
       return { hasWinner: true, winner: player };
     }
+    
+    if (checkColumn(squares, i, player)) {
+      return { hasWinner: true, winner: player };
+    }
   }
 
   return { hasWinner: false };
