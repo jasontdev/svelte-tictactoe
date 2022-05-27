@@ -29,10 +29,37 @@ function checkColumn(
 ) {
   let matches = 0;
   for (let i = 0; i < 3; ++i) {
-    if (squares[i * 3 + column] !== null && squares[i * 3 + column].id === player.id) {
+    if (
+      squares[i * 3 + column] !== null &&
+      squares[i * 3 + column].id === player.id
+    ) {
       matches++;
     }
   }
+  return matches === 3;
+}
+
+function checkDiagonal(
+  squares: (Player | null)[],
+  diagonal: number,
+  player: Player
+): boolean {
+  // squares in diagonal 0 run left to right, top to bottom
+  const diagonalSquares = [
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  let matches = 0;
+  for (let i = 0; i < 3; ++i) {
+    if (
+      squares[diagonalSquares[diagonal][i]] &&
+      squares[diagonalSquares[diagonal][i]].id === player.id
+    ) {
+      matches++;
+    }
+  }
+
   return matches === 3;
 }
 
@@ -41,14 +68,18 @@ function checkForWinner(squares: (Player | null)[], player: Player): Result {
     if (checkRow(squares, i, player)) {
       return { hasWinner: true, winner: player };
     }
-    
+
     if (checkColumn(squares, i, player)) {
       return { hasWinner: true, winner: player };
     }
   }
 
+  if(checkDiagonal(squares, 0, player) || checkDiagonal(squares, 1, player)) {
+    return {hasWinner: true, winner: player};
+  }
+
   return { hasWinner: false };
 }
 
-export { checkForWinner, checkRow, checkColumn };
+export { checkForWinner, checkRow, checkColumn, checkDiagonal };
 export type { Player };
