@@ -1,9 +1,10 @@
 import { checkRow, Player } from "../lib/game-logic";
 import { expect, test } from "vitest";
 
+const playerOne: Player = { id: 0, name: "Alfred" };
+const playerTwo: Player = { id: 1, name: "Jason" };
+
 test("check row all present", () => {
-  const playerOne: Player = { id: 0, name: "Alfred" };
-  const playerTwo: Player = { id: 1, name: "Jason" };
   const squares: (Player | null)[] = [
     playerOne,
     playerOne,
@@ -19,9 +20,39 @@ test("check row all present", () => {
   expect(checkRow(squares, 0, playerOne)).toBe(true);
 });
 
+test("check row, 2nd row present", () => {
+  const squares: (Player | null)[] = [
+    playerOne,
+    null,
+    playerOne,
+    playerTwo,
+    playerTwo,
+    playerTwo,
+    null,
+    playerOne,
+    null,
+  ];
+
+  expect(checkRow(squares, 1, playerTwo)).toBe(true);
+});
+
+test("check row, 3rd row present", () => {
+  const squares: (Player | null)[] = [
+    playerTwo,
+    null,
+    null,
+    null,
+    playerTwo,
+    null,
+    playerOne,
+    playerOne,
+    playerOne,
+  ];
+
+  expect(checkRow(squares, 2, playerOne)).toBe(true);
+});
+
 test("check row none present", () => {
-  const playerOne: Player = { id: 0, name: "Alfred" };
-  const playerTwo: Player = { id: 1, name: "Jason" };
   const squares: (Player | null)[] = [
     playerOne,
     playerTwo,
@@ -37,8 +68,6 @@ test("check row none present", () => {
 });
 
 test("check row with full board, no rows", () => {
-  const playerOne: Player = { id: 0, name: "Alfred" };
-  const playerTwo: Player = { id: 1, name: "Jason" };
   const squares: (Player | null)[] = [
     playerOne,
     playerTwo,
@@ -54,8 +83,6 @@ test("check row with full board, no rows", () => {
 });
 
 test("check row with empty board", () => {
-  const playerOne: Player = { id: 0, name: "Alfred" };
-  const playerTwo: Player = { id: 1, name: "Jason" };
   const squares: (Player | null)[] = [
     null,
     null,
