@@ -48,7 +48,7 @@
     <h1 class="title">Svelte Tic Tac Toe</h1>
     <Board {squares} on:squareClicked={handleClick} />
     {#if winner}
-      <h2>Congratulations, player {winner}</h2>
+      <h2>Congratulations, {winner.name}</h2>
     {/if}
   </main>
 </div>
