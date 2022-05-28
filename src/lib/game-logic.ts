@@ -74,8 +74,8 @@ function checkForWinner(squares: (Player | null)[], player: Player): Result {
     }
   }
 
-  if(checkDiagonal(squares, 0, player) || checkDiagonal(squares, 1, player)) {
-    return {hasWinner: true, winner: player};
+  if (checkDiagonal(squares, 0, player) || checkDiagonal(squares, 1, player)) {
+    return { hasWinner: true, winner: player };
   }
 
   return { hasWinner: false };
