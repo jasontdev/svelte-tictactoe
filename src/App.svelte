@@ -1,6 +1,7 @@
 <script lang="ts">
   import Board from "./lib/Board.svelte";
   import { checkForWinner, Player } from "./lib/game-logic";
+  import { score } from "./lib/stores";
 
   let squares: (Player | null)[] = [
     null,
@@ -17,15 +18,22 @@
   let playerOne = {
     id: 0,
     name: "Alfred",
+    gamesWon: 0,
   };
 
   let playerTwo = {
     id: 1,
     name: "Jason",
+    gamesWon: 0,
   };
   let currentPlayer = playerOne;
   let winner: Player | null = null;
   let boardFull = false;
+
+  score.subscribe((currentScores) => {
+    playerOne.gamesWon = currentScores[0];
+    playerTwo.gamesWon = currentScores[1];
+  });
 
   function handleClick(event: CustomEvent<{ square: number }>) {
     if (!winner) {
@@ -39,6 +47,11 @@
           result.winner.id === currentPlayer.id
         ) {
           winner = currentPlayer;
+          score.update((currentScore) => {
+            let updatedScore = [...currentScore];
+            updatedScore[winner.id] = currentScore[winner.id] + 1;
+            return updatedScore;
+          });
         } else {
           if (squares.filter((square) => square === null).length === 0) {
             boardFull = true;
@@ -60,6 +73,10 @@
 <div class="layout">
   <main class="content">
     <h1 class="title">Svelte Tic Tac Toe</h1>
+    <div class="scores">
+      <div>{playerOne.name}: {playerOne.gamesWon}</div>
+      <div>{playerTwo.name}: {playerTwo.gamesWon}</div>
+    </div>
     <Board {squares} on:squareClicked={handleClick} />
     {#if winner}
       <h2>Congratulations, {winner.name}</h2>
@@ -97,6 +114,15 @@
     flex-direction: column;
     align-items: center;
     width: min(100%, 700px);
+  }
+
+  .scores {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: larger;
+    font-weight: bold;
+    margin-bottom: 1rem;
   }
 
   button {
