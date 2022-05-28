@@ -7,7 +7,8 @@
 </script>
 
 <div
-  class={player === null ? "empty" : "occupied"}
+  class="square"
+  class:empty={player === null}
   on:click={() => dispatch("squareClicked", { square: key })}
 >
   {#if player}
@@ -17,18 +18,11 @@
 
 <style>
   .empty {
-    box-sizing: border-box;
     border-style: solid;
     border-radius: 10px;
-    width: 110px;
-    height: 110px;
-    font-size: 6rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
-  .occupied {
+  .square {
     box-sizing: border-box;
     width: 110px;
     height: 110px;
