@@ -41,7 +41,6 @@
           winner = currentPlayer;
         } else {
           if (squares.filter((square) => square === null).length === 0) {
-            console.log("Board full");
             boardFull = true;
           } else {
             currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
