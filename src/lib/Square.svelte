@@ -1,20 +1,17 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import svelteLogo from "../assets/svelte-logo.svg";
-  import reactLogo from "../assets/react-logo.svg";
+
   export let player = null;
   export let key: number;
   const dispatch = createEventDispatcher();
 </script>
 
-<div class={player === null ? "empty" : "occupied"} on:click={() => dispatch("squareClicked", { square: key })}>
+<div
+  class={player === null ? "empty" : "occupied"}
+  on:click={() => dispatch("squareClicked", { square: key })}
+>
   {#if player}
-    {#if player.id == 0}
-      <img src={svelteLogo} alt="Svelte logo" />
-    {/if}
-    {#if player.id == 1}
-      <img src={reactLogo} alt="React logo" />
-    {/if}
+    <img src={player.logo} alt={player.logoAlt} />
   {/if}
 </div>
 
