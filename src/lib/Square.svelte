@@ -17,11 +17,6 @@
 </div>
 
 <style>
-  .empty {
-    border-style: solid;
-    border-radius: 10px;
-  }
-
   .square {
     box-sizing: border-box;
     width: 110px;
@@ -30,5 +25,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .empty {
+    border-style: solid;
+    border-radius: 10px;
   }
 </style>
