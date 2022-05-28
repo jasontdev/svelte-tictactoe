@@ -131,7 +131,7 @@
     padding: 0.25rem 1rem 0.25rem 1rem;
     border-color: #ff3e00;
     border-style: solid;
-    border-radius: 5px;
+    border-radius: 10px;
     border-width: 2px;
     font-size: x-large;
     font-weight: bold;
