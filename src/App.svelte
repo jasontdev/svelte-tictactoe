@@ -17,13 +17,13 @@
 
   let playerOne = {
     id: 0,
-    name: "Alfred",
+    name: "Svelte",
     gamesWon: 0,
   };
 
   let playerTwo = {
     id: 1,
-    name: "Jason",
+    name: "React",
     gamesWon: 0,
   };
   let currentPlayer = playerOne;
