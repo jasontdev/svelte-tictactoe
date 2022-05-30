@@ -31,4 +31,10 @@
     border-style: solid;
     border-radius: 10px;
   }
+
+  .empty:hover {
+    transform: scale(1.05);
+    border-color: dodgerblue;
+    transition-duration: 0.5s;
+  }
 </style>
