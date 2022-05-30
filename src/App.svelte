@@ -2,8 +2,6 @@
   import Board from "./lib/Board.svelte";
   import { checkForWinner, Player } from "./lib/game-logic";
   import { score } from "./lib/stores";
-  import svelteLogo from "./assets/svelte-logo.svg";
-  import vueLogo from "./assets/vue-logo.svg";
 
   let squares: (Player | null)[] = [
     null,
@@ -19,17 +17,13 @@
 
   let playerOne = {
     id: 0,
-    name: "Svelte",
-    logo: svelteLogo,
-    logoAlt: "Svelte logo",
+    name: "Player 1",
     gamesWon: 0,
   };
 
   let playerTwo = {
     id: 1,
-    name: "Vue",
-    logo: vueLogo,
-    logoAlt: "Vue logo",
+    name: "Player 2",
     gamesWon: 0,
   };
   let currentPlayer = playerOne;

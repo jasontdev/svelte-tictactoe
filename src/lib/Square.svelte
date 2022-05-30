@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import svelteLogo from "../assets/svelte-logo.svg";
 
   export let player = null;
   export let key: number;
@@ -12,7 +13,7 @@
   on:click={() => dispatch("squareClicked", { square: key })}
 >
   {#if player}
-    <img src={player.logo} alt={player.logoAlt} />
+    <img src={svelteLogo} alt={`${player.name} logo`} />
   {/if}
 </div>
 
