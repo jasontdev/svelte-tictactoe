@@ -78,7 +78,7 @@
 
 <div class="layout">
   <main class="content">
-    <h1 class="title">Framework Tic Tac Toe</h1>
+    <h1 class="title">Svelte Tic Tac Toe</h1>
     <div class="scores">
       <div>{playerOne.name}: {playerOne.gamesWon}</div>
       <div>{playerTwo.name}: {playerTwo.gamesWon}</div>
