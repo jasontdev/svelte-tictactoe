@@ -21,6 +21,7 @@
     id: 0,
     name: "Player 1",
     icon: orangeSvelteLogo,
+    color: "#ff3e00",
     gamesWon: 0,
   };
 
@@ -28,6 +29,7 @@
     id: 1,
     name: "Player 2",
     icon: blueSvelteLogo,
+    color: "#40b3ff",
     gamesWon: 0,
   };
   let currentPlayer = playerOne;
@@ -76,33 +78,39 @@
 
 <div class="layout">
   <main class="content">
-    <h1 class="title">Svelte Tic Tac Toe</h1>
+    <h1 class="title">SVELTE TIC TAC TOE</h1>
     <div class="scores">
-      <div>{playerOne.name}: {playerOne.gamesWon}</div>
-      <div>{playerTwo.name}: {playerTwo.gamesWon}</div>
+      <div class="score" style="color: {playerOne.color}">{playerOne.name}: {playerOne.gamesWon}</div>
+      <div class="score" style="color: {playerTwo.color}">{playerTwo.name}: {playerTwo.gamesWon}</div>
     </div>
     <Board {squares} on:squareClicked={handleClick} />
+  </main>
+  <div class="post-game">
     {#if winner}
-      <h2>Congratulations, {winner.name}</h2>
+      <div class="result" style="color: {winner.color};">Congratulations, {winner.name}</div>
     {/if}
     {#if boardFull}
-      <h2>Game over</h2>
+      <div class="result">It's a draw</div>
     {/if}
     {#if winner || boardFull}
       <button on:click={resetGame}>Play another round</button>
     {/if}
-  </main>
+  </div>
 </div>
 
 <style>
   :root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    color: #ff3e00;
+    color: #676778;
+    background-color: #e2ebf1;
   }
 
   .title {
+    font-size: xx-large;
+    font-weight: 500;
     text-align: center;
+    color: #4a4a55;
   }
 
   .layout {
@@ -110,7 +118,7 @@
     flex-direction: column;
     align-items: center;
     max-width: 100%;
-    width: 100hw;
+    height: 100vh;
   }
 
   .content {
@@ -129,9 +137,34 @@
     margin-bottom: 1rem;
   }
 
+  .score {
+    border-style: solid;
+    border-radius: 10px;
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+    background-color: whitesmoke;
+  }
+
+  .post-game {
+    width: min(100%, 700px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .result {
+    font-size: x-large;
+    font-weight: bold;
+    background-color: whitesmoke;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+  }
+
   button {
     background-color: #ff3e00;
-    color: white;
+    color: whitesmoke;
     padding: 0.25rem 1rem 0.25rem 1rem;
     border-color: #ff3e00;
     border-style: solid;
