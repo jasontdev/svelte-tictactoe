@@ -4,6 +4,7 @@
   import { score } from "./lib/stores";
   import orangeSvelteLogo from "./assets/svelte-logo.svg";
   import blueSvelteLogo from "./assets/svelte-logo-blue.svg";
+  import PostGameModal from "./lib/PostGameModal.svelte";
 
   let squares: (Player | null)[] = [
     null,
@@ -80,22 +81,18 @@
   <main class="content">
     <h1 class="title">SVELTE TIC TAC TOE</h1>
     <div class="scores">
-      <div class="score" style="color: {playerOne.color}">{playerOne.name}: {playerOne.gamesWon}</div>
-      <div class="score" style="color: {playerTwo.color}">{playerTwo.name}: {playerTwo.gamesWon}</div>
+      <div class="score" style="color: {playerOne.color}">
+        {playerOne.name}: {playerOne.gamesWon}
+      </div>
+      <div class="score" style="color: {playerTwo.color}">
+        {playerTwo.name}: {playerTwo.gamesWon}
+      </div>
     </div>
     <Board {squares} on:squareClicked={handleClick} />
   </main>
-  <div class="post-game">
-    {#if winner}
-      <div class="result" style="color: {winner.color};">Congratulations, {winner.name}</div>
-    {/if}
-    {#if boardFull}
-      <div class="result">It's a draw</div>
-    {/if}
-    {#if winner || boardFull}
-      <button on:click={resetGame}>Play another round</button>
-    {/if}
-  </div>
+  {#if winner || boardFull}
+    <PostGameModal {winner} resetHandler={resetGame} />
+  {/if}
 </div>
 
 <style>
@@ -142,39 +139,5 @@
     border-radius: 10px;
     padding: 0.1rem 0.5rem 0.1rem 0.5rem;
     background-color: whitesmoke;
-  }
-
-  .post-game {
-    width: min(100%, 700px);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-
-  .result {
-    font-size: x-large;
-    font-weight: bold;
-    background-color: whitesmoke;
-    border-style: solid;
-    border-radius: 10px;
-    padding: 0.5rem 2rem 0.5rem 2rem;
-  }
-
-  button {
-    background-color: #ff3e00;
-    color: whitesmoke;
-    padding: 0.25rem 1rem 0.25rem 1rem;
-    border-color: #ff3e00;
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 2px;
-    font-size: x-large;
-    font-weight: bold;
-  }
-
-  button:hover {
-    transform: scale(1.05);
   }
 </style>
