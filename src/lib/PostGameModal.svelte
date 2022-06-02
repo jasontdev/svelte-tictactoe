@@ -1,7 +1,16 @@
 <script lang="ts">
   import type { Player } from "./game-logic";
+  import { score } from "./stores";
+
   export let winner: Player;
   export let resetHandler: () => void;
+  let playerOne = { gamesWon: 0};
+  let playerTwo = { gamesWon: 0};
+
+  score.subscribe((currentScores) => {
+    playerOne.gamesWon = currentScores[0];
+    playerTwo.gamesWon = currentScores[1];
+  });
 </script>
 
 <div class="backdrop">
@@ -12,6 +21,16 @@
   {:else}
     <div class="result">It's a draw</div>
   {/if}
+  <div class="scoreboard">
+    <div>
+      <div>Player 1</div>
+      <div class="score">{playerOne.gamesWon}</div>
+    </div>    
+    <div>
+      <div>Player 2</div>
+      <div class="score">{playerTwo.gamesWon}</div>
+    </div>
+  </div>
   <button on:click={() => resetHandler()}>Play another round</button>
 </div>
 
@@ -39,6 +58,22 @@
 
   button:hover {
     transform: scale(1.05);
+  }
+
+  .scoreboard {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    font-size: xx-large;
+    border-radius: 10px;
+    border-style: solid;
+    background-color: whitesmoke;
+    padding: 1rem;
+  }
+
+  .score {
+    font-size: xxx-large;
+    text-align: center;
   }
 
   .backdrop {
